@@ -28,6 +28,10 @@ const Home = () => {
           <nav className="nav-menu">
             <button className="nav-button" onClick={() => navigate('/')}>Home</button>
             <button className="nav-button" onClick={() => navigate('/view-players')}>View Players</button>
+            <button className="nav-button" onClick={() => navigate('/auction')}>Auction</button>
+            <button className="nav-button" onClick={() => navigate('/teams')}>Teams</button>
+            <button className="nav-button" onClick={() => navigate('/reports')}>Reports</button>
+            <button className="nav-button" onClick={() => navigate('/admin')}>Admin</button>
             <button className="nav-button register-btn" onClick={handleRegisterPlayer}>
               Player Registration
             </button>
@@ -50,17 +54,17 @@ const Home = () => {
             Premier Softball Cricket Tournament 2026
           </p>
           <div className="hero-buttons">
-            <button className="primary-button" onClick={handleRegisterPlayer}>
-              Register Player
+            <button className="primary-button" onClick={() => navigate('/auction')}>
+              Start Auction
             </button>
-            <button className="secondary-button" onClick={() => navigate('/view-players')}>
-              View Players
+            <button className="secondary-button" onClick={() => navigate('/teams')}>
+              View Teams
             </button>
           </div>
         </div>
         <div className="stats-bar">
           <div className="stat-item">
-            <div className="stat-number">8</div>
+            <div className="stat-number">4</div>
             <div className="stat-label">Teams</div>
           </div>
           <div className="stat-divider"></div>
@@ -70,7 +74,7 @@ const Home = () => {
           </div>
           <div className="stat-divider"></div>
           <div className="stat-item">
-            <div className="stat-number">100+</div>
+            <div className="stat-number">40+</div>
             <div className="stat-label">Players</div>
           </div>
         </div>

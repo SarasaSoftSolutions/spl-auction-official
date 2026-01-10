@@ -1,0 +1,536 @@
+.reports-container {
+  min-height: 100vh;
+  background: #0a0e27;
+  padding-bottom: 60px;
+}
+
+/* Header */
+.reports-header {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  padding: 20px 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.reports-header .header-content {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reports-header .logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.reports-header .cricket-ball-small {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #ff0844 0%, #ff6b35 100%);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 3px 10px rgba(255, 8, 68, 0.4);
+}
+
+.reports-header .cricket-ball-small::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: white;
+  transform: translateY(-50%);
+  box-shadow: 0 -6px 0 white, 0 6px 0 white;
+}
+
+.reports-header .logo h1 {
+  color: white;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.reports-header .nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.reports-header .nav-button {
+  padding: 10px 20px;
+  background: transparent;
+  color: white;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.reports-header .nav-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: white;
+}
+
+.reports-header .nav-button.active {
+  background: linear-gradient(135deg, #ff0844 0%, #ff6b35 100%);
+  border: none;
+}
+
+.reports-header .user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-left: 20px;
+  padding-left: 20px;
+  border-left: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.reports-header .username {
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.reports-header .logout-btn {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid white;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.reports-header .logout-btn:hover {
+  background: white;
+  color: #1e3c72;
+}
+
+/* Page Header */
+.reports-page-header {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  padding: 60px 20px;
+  text-align: center;
+  border-bottom: 4px solid #ff0844;
+}
+
+.page-title {
+  font-size: 48px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.page-subtitle {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 1px;
+}
+
+/* Report Configuration */
+.report-config-section {
+  max-width: 1400px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.report-config-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.config-card,
+.preview-card {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  border-radius: 20px;
+  padding: 35px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.config-card h2,
+.preview-card h2 {
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.config-group {
+  margin-bottom: 25px;
+}
+
+.config-group label {
+  display: block;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.config-select {
+  width: 100%;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.config-select option {
+  background: #1e3c72;
+  color: white;
+}
+
+.config-select:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #ff0844;
+}
+
+.action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.action-btn {
+  padding: 18px 25px;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.pdf-btn {
+  background: linear-gradient(135deg, #ff0844 0%, #ff6b35 100%);
+}
+
+.pdf-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 8, 68, 0.6);
+}
+
+.excel-btn {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.excel-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(67, 233, 123, 0.6);
+}
+
+.action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-icon {
+  font-size: 20px;
+}
+
+.divider {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 30px 0;
+}
+
+.special-reports h3 {
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.special-btn {
+  width: 100%;
+  padding: 18px 25px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.special-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+/* Preview Card */
+.preview-stats {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 25px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.preview-stat .stat-number {
+  font-size: 48px;
+  font-weight: 800;
+  color: #ff0844;
+  margin-bottom: 5px;
+}
+
+.preview-stat .stat-label {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.preview-list {
+  max-height: 300px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.preview-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.preview-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.preview-list::-webkit-scrollbar-thumb {
+  background: #ff0844;
+  border-radius: 10px;
+}
+
+.preview-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: white;
+}
+
+.preview-number {
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 8, 68, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.preview-name {
+  flex: 1;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.preview-age {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.preview-team {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+}
+
+.preview-more {
+  text-align: center;
+  padding: 15px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  font-style: italic;
+}
+
+.preview-loading {
+  text-align: center;
+  padding: 40px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+}
+
+/* Teams Summary */
+.teams-summary-section {
+  background: rgba(30, 60, 114, 0.2);
+  padding: 60px 20px;
+  margin-top: 40px;
+}
+
+.teams-summary-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.teams-summary-container h2 {
+  color: white;
+  font-size: 32px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.teams-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.team-summary-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.team-summary-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.team-summary-header {
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+
+.team-summary-header h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.team-summary-body {
+  padding: 25px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e0e0e0;
+  color: #2d3436;
+}
+
+.summary-row:last-child {
+  border-bottom: none;
+}
+
+.summary-row span {
+  font-size: 14px;
+  color: #636e72;
+}
+
+.summary-row strong {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2d3436;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .report-config-container {
+    grid-template-columns: 1fr;
+  }
+
+  .action-buttons {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .reports-header .header-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .reports-header .nav-menu {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .reports-header .user-info {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .page-title {
+    font-size: 32px;
+  }
+
+  .teams-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}

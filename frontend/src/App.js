@@ -4,6 +4,10 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import PlayerRegistration from './pages/PlayerRegistration';
 import ViewPlayers from './pages/ViewPlayers';
+import Auction from './pages/Auction';
+import Teams from './pages/Teams';
+import Reports from './pages/Reports';
+import Admin from './pages/Admin';
 import './App.css';
 
 function App() {
@@ -39,6 +43,38 @@ function App() {
             element={
               <PrivateRoute>
                 <ViewPlayers />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/auction" 
+            element={
+              <PrivateRoute>
+                <Auction />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/teams" 
+            element={
+              <PrivateRoute>
+                <Teams />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/reports" 
+            element={
+              <PrivateRoute>
+                <Reports />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/admin" 
+            element={
+              <PrivateRoute>
+                <Admin />
               </PrivateRoute>
             } 
           />

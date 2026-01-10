@@ -52,8 +52,22 @@ const getPlayerById = async (req, res) => {
   }
 };
 
+// Delete all players (truncate)
+const deleteAllPlayers = async (req, res) => {
+  try {
+    const result = await Player.deleteMany({});
+    res.status(200).json({ 
+      message: 'All players deleted successfully',
+      deletedCount: result.deletedCount
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   registerPlayer,
   getAllPlayers,
-  getPlayerById
+  getPlayerById,
+  deleteAllPlayers
 };

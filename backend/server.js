@@ -17,6 +17,7 @@ connectDB();
 
 // Routes
 app.use('/api/players', require('./routes/playerRoutes'));
+app.use('/api/teams', require('./routes/teamRoutes'));
 
 app.get('/', (req, res) => {
   res.json({ message: 'SPL Auction API is running' });

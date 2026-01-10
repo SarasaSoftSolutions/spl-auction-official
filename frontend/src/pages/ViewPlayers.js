@@ -83,6 +83,10 @@ const ViewPlayers = () => {
           <nav className="nav-menu">
             <button className="nav-button" onClick={() => navigate('/')}>Home</button>
             <button className="nav-button active">View Players</button>
+            <button className="nav-button" onClick={() => navigate('/auction')}>Auction</button>
+            <button className="nav-button" onClick={() => navigate('/teams')}>Teams</button>
+            <button className="nav-button" onClick={() => navigate('/reports')}>Reports</button>
+            <button className="nav-button" onClick={() => navigate('/admin')}>Admin</button>
             <button className="nav-button" onClick={() => navigate('/register-player')}>
               Register Player
             </button>

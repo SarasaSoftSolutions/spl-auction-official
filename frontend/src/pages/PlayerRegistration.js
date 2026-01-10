@@ -28,7 +28,7 @@ const PlayerRegistration = () => {
     setMessage({ type: '', text: '' });
 
     try {
-      const response = await axios.post('http://localhost:5000/api/players', formData);
+      await axios.post('http://localhost:5000/api/players', formData);
       
       setMessage({ 
         type: 'success', 
@@ -75,7 +75,12 @@ const PlayerRegistration = () => {
           </div>
           <nav className="nav-menu">
             <button className="nav-button" onClick={() => navigate('/')}>Home</button>
-            <button className="nav-button active">Player Registration</button>
+            <button className="nav-button" onClick={() => navigate('/view-players')}>View Players</button>
+            <button className="nav-button" onClick={() => navigate('/auction')}>Auction</button>
+            <button className="nav-button" onClick={() => navigate('/teams')}>Teams</button>
+            <button className="nav-button" onClick={() => navigate('/reports')}>Reports</button>
+            <button className="nav-button" onClick={() => navigate('/admin')}>Admin</button>
+            <button className="nav-button active" onClick={() => navigate('/register-player')}>Player Registration</button>
             <div className="user-info">
               <span className="username">{localStorage.getItem('username')}</span>
               <button className="logout-btn" onClick={handleLogout}>Logout</button>
