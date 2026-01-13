@@ -10,6 +10,7 @@ const ViewPlayers = () => {
   const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [filterBowling, setFilterBowling] = useState('All');
+  const [imageErrors, setImageErrors] = useState({});
   const userRole = localStorage.getItem('userRole') || 'admin';
 
   useEffect(() => {
@@ -40,6 +41,13 @@ const ViewPlayers = () => {
     localStorage.removeItem('username');
     localStorage.removeItem('userRole');
     navigate('/login');
+  };
+
+  const handleImageError = (playerId) => {
+    setImageErrors(prev => ({
+      ...prev,
+      [playerId]: true
+    }));
   };
 
   const getAvatarColor = (name) => {
@@ -210,9 +218,18 @@ const ViewPlayers = () => {
             {filteredPlayers.map((player) => (
               <div key={player.id} className="player-card">
                 <div className="player-card-header">
-                  <div className="player-avatar" style={{ background: getAvatarColor(player.player_name) }}>
-                    {getInitials(player.player_name)}
-                  </div>
+                  {!imageErrors[player.id] ? (
+                    <img 
+                      src={`https://spl.sarasagroup.lk/assets/Images/players/${player.player_name}.png`}
+                      alt={player.player_name}
+                      className="player-image"
+                      onError={() => handleImageError(player.id)}
+                    />
+                  ) : (
+                    <div className="player-avatar" style={{ background: getAvatarColor(player.player_name) }}>
+                      {getInitials(player.player_name)}
+                    </div>
+                  )}
                   <div className="player-badge">{getBowlingIcon(player.bowling_style)}</div>
                 </div>
                 <div className="player-card-body">
