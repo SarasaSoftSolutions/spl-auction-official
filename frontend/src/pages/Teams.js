@@ -8,6 +8,7 @@ const Teams = () => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedTeam, setSelectedTeam] = useState(null);
+  const userRole = localStorage.getItem('userRole') || 'admin';
 
   useEffect(() => {
     fetchTeams();
@@ -30,6 +31,7 @@ const Teams = () => {
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('username');
+    localStorage.removeItem('userRole');
     navigate('/login');
   };
 
@@ -85,18 +87,28 @@ const Teams = () => {
       {/* Header */}
       <header className="teams-header">
         <div className="header-content">
-          <div className="logo" onClick={() => navigate('/')}>
+          <div className="logo" onClick={() => navigate(userRole === 'staff' ? '/staff-dashboard' : '/')}>
             <div className="cricket-ball-small"></div>
             <h1>SPL AUCTION</h1>
           </div>
           <nav className="nav-menu">
-            <button className="nav-button" onClick={() => navigate('/')}>Home</button>
+            <button className="nav-button" onClick={() => navigate(userRole === 'staff' ? '/staff-dashboard' : '/')}>
+              {userRole === 'staff' ? 'Dashboard' : 'Home'}
+            </button>
             <button className="nav-button" onClick={() => navigate('/view-players')}>View Players</button>
-            <button className="nav-button" onClick={() => navigate('/auction')}>Auction</button>
+            {userRole === 'admin' && (
+              <>
+                <button className="nav-button" onClick={() => navigate('/auction')}>Auction</button>
+              </>
+            )}
             <button className="nav-button active">Teams</button>
-            <button className="nav-button" onClick={() => navigate('/reports')}>Reports</button>
-            <button className="nav-button" onClick={() => navigate('/admin')}>Admin</button>
-            <button className="nav-button" onClick={() => navigate('/register-player')}>Register Player</button>
+            {userRole === 'admin' && (
+              <>
+                <button className="nav-button" onClick={() => navigate('/reports')}>Reports</button>
+                <button className="nav-button" onClick={() => navigate('/admin')}>Admin</button>
+                <button className="nav-button" onClick={() => navigate('/register-player')}>Register Player</button>
+              </>
+            )}
             <div className="user-info">
               <span className="username">{localStorage.getItem('username')}</span>
               <button className="logout-btn" onClick={handleLogout}>Logout</button>

@@ -15,7 +15,13 @@ const Login = () => {
     if (username === 'Sarasa' && password === 'Sarasa@123') {
       localStorage.setItem('isAuthenticated', 'true');
       localStorage.setItem('username', username);
+      localStorage.setItem('userRole', 'admin');
       navigate('/');
+    } else if (username === 'staff' && password === 'tstc123') {
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('username', username);
+      localStorage.setItem('userRole', 'staff');
+      navigate('/staff-dashboard');
     } else {
       setError('Invalid username or password');
     }

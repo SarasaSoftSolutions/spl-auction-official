@@ -10,6 +10,7 @@ const ViewPlayers = () => {
   const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [filterBowling, setFilterBowling] = useState('All');
+  const userRole = localStorage.getItem('userRole') || 'admin';
 
   useEffect(() => {
     fetchPlayers();
@@ -18,10 +19,18 @@ const ViewPlayers = () => {
   const fetchPlayers = async () => {
     try {
       const response = await axios.get('https://spl.sarasagroup.lk/backend/api/players.php');
-      setPlayers(response.data);
+      // Ensure response.data is an array
+      if (Array.isArray(response.data)) {
+        setPlayers(response.data);
+      } else {
+        setPlayers([]);
+        console.error('API response is not an array:', response.data);
+      }
       setLoading(false);
     } catch (err) {
+      console.error('Failed to fetch players:', err);
       setError('Failed to load players');
+      setPlayers([]);
       setLoading(false);
     }
   };
@@ -29,6 +38,7 @@ const ViewPlayers = () => {
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('username');
+    localStorage.removeItem('userRole');
     navigate('/login');
   };
 
@@ -76,20 +86,30 @@ const ViewPlayers = () => {
       {/* Header */}
       <header className="players-header">
         <div className="header-content">
-          <div className="logo" onClick={() => navigate('/')}>
+          <div className="logo" onClick={() => navigate(userRole === 'staff' ? '/staff-dashboard' : '/')}>
             <div className="cricket-ball-small"></div>
             <h1>SPL AUCTION</h1>
           </div>
           <nav className="nav-menu">
-            <button className="nav-button" onClick={() => navigate('/')}>Home</button>
-            <button className="nav-button active">View Players</button>
-            <button className="nav-button" onClick={() => navigate('/auction')}>Auction</button>
-            <button className="nav-button" onClick={() => navigate('/teams')}>Teams</button>
-            <button className="nav-button" onClick={() => navigate('/reports')}>Reports</button>
-            <button className="nav-button" onClick={() => navigate('/admin')}>Admin</button>
-            <button className="nav-button" onClick={() => navigate('/register-player')}>
-              Register Player
+            <button className="nav-button" onClick={() => navigate(userRole === 'staff' ? '/staff-dashboard' : '/')}>
+              {userRole === 'staff' ? 'Dashboard' : 'Home'}
             </button>
+            <button className="nav-button active">View Players</button>
+            {userRole === 'admin' && (
+              <>
+                <button className="nav-button" onClick={() => navigate('/auction')}>Auction</button>
+              </>
+            )}
+            <button className="nav-button" onClick={() => navigate('/teams')}>Teams</button>
+            {userRole === 'admin' && (
+              <>
+                <button className="nav-button" onClick={() => navigate('/reports')}>Reports</button>
+                <button className="nav-button" onClick={() => navigate('/admin')}>Admin</button>
+                <button className="nav-button" onClick={() => navigate('/register-player')}>
+                  Register Player
+                </button>
+              </>
+            )}
             <div className="user-info">
               <span className="username">{localStorage.getItem('username')}</span>
               <button className="logout-btn" onClick={handleLogout}>Logout</button>

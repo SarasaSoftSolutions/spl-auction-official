@@ -2,6 +2,7 @@ import React from 'react';
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Home from './pages/Home';
+import StaffDashboard from './pages/StaffDashboard';
 import PlayerRegistration from './pages/PlayerRegistration';
 import ViewPlayers from './pages/ViewPlayers';
 import Auction from './pages/Auction';
@@ -16,6 +17,14 @@ function App() {
     return isAuthenticated ? children : <Navigate to="/login" />;
   };
 
+  const AdminRoute = ({ children }) => {
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    const userRole = localStorage.getItem('userRole');
+    if (!isAuthenticated) return <Navigate to="/login" />;
+    if (userRole !== 'admin') return <Navigate to="/staff-dashboard" />;
+    return children;
+  };
+
   return (
     <Router>
       <div className="App">
@@ -24,17 +33,25 @@ function App() {
           <Route 
             path="/" 
             element={
-              <PrivateRoute>
+              <AdminRoute>
                 <Home />
+              </AdminRoute>
+            } 
+          />
+          <Route 
+            path="/staff-dashboard" 
+            element={
+              <PrivateRoute>
+                <StaffDashboard />
               </PrivateRoute>
             } 
           />
           <Route 
             path="/register-player" 
             element={
-              <PrivateRoute>
+              <AdminRoute>
                 <PlayerRegistration />
-              </PrivateRoute>
+              </AdminRoute>
             } 
           />
           <Route 
@@ -48,9 +65,9 @@ function App() {
           <Route 
             path="/auction" 
             element={
-              <PrivateRoute>
+              <AdminRoute>
                 <Auction />
-              </PrivateRoute>
+              </AdminRoute>
             } 
           />
           <Route 
@@ -64,17 +81,17 @@ function App() {
           <Route 
             path="/reports" 
             element={
-              <PrivateRoute>
+              <AdminRoute>
                 <Reports />
-              </PrivateRoute>
+              </AdminRoute>
             } 
           />
           <Route 
             path="/admin" 
             element={
-              <PrivateRoute>
+              <AdminRoute>
                 <Admin />
-              </PrivateRoute>
+              </AdminRoute>
             } 
           />
         </Routes>
