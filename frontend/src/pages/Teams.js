@@ -15,7 +15,7 @@ const Teams = () => {
 
   const fetchTeams = async () => {
     try {
-      const response = await axios.get('http://localhost:8081/backend/api/teams.php');
+      const response = await axios.get('https://spl.sarasagroup.lk/backend/api/teams.php');
       setTeams(response.data);
       if (response.data.length > 0) {
         setSelectedTeam(response.data[0]);

@@ -21,8 +21,8 @@ const Reports = () => {
   const fetchData = async () => {
     try {
       const [playersRes, teamsRes] = await Promise.all([
-        axios.get('http://localhost:8081/backend/api/players.php'),
-        axios.get('http://localhost:8081/backend/api/teams.php')
+        axios.get('https://spl.sarasagroup.lk/backend/api/players.php'),
+        axios.get('https://spl.sarasagroup.lk/backend/api/teams.php')
       ]);
       setPlayers(playersRes.data);
       setTeams(teamsRes.data);

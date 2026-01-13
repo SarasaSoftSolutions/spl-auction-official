@@ -11,9 +11,8 @@ import Admin from './pages/Admin';
 import './App.css';
 
 function App() {
-  const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
-
   const PrivateRoute = ({ children }) => {
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
     return isAuthenticated ? children : <Navigate to="/login" />;
   };
 

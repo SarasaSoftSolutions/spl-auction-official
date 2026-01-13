@@ -16,6 +16,7 @@ const Auction = () => {
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [auctionResult, setAuctionResult] = useState(null);
+  const [audio] = useState(new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_d1718ab41b.mp3'));
 
   useEffect(() => {
     fetchPlayers();
@@ -25,7 +26,7 @@ const Auction = () => {
 
   const initializeTeams = async () => {
     try {
-      await axios.post('http://localhost:8081/backend/api/teams/initialize.php');
+      await axios.post('https://spl.sarasagroup.lk/backend/api/teams/initialize.php');
     } catch (error) {
       console.error('Error initializing teams:', error);
     }
@@ -33,7 +34,7 @@ const Auction = () => {
 
   const fetchPlayers = async () => {
     try {
-      const response = await axios.get('http://localhost:8081/backend/api/players.php');
+      const response = await axios.get('https://spl.sarasagroup.lk/backend/api/players.php');
       setPlayers(response.data.filter(p => p.sold_status !== 'Sold'));
     } catch (error) {
       console.error('Error fetching players:', error);
@@ -42,7 +43,7 @@ const Auction = () => {
 
   const fetchTeams = async () => {
     try {
-      const response = await axios.get('http://localhost:8081/backend/api/teams.php');
+      const response = await axios.get('https://spl.sarasagroup.lk/backend/api/teams.php');
       setTeams(response.data);
     } catch (error) {
       console.error('Error fetching teams:', error);
@@ -116,7 +117,7 @@ const Auction = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:8081/backend/api/teams/auction.php', {
+      const response = await axios.post('https://spl.sarasagroup.lk/backend/api/teams/auction.php', {
         playerId: selectedPlayer.id,
         teamName: selectedTeam,
         soldValue: (playerRole === 'Captain' || playerRole === 'Manager') ? 0 : parseInt(soldValue),
@@ -135,9 +136,18 @@ const Auction = () => {
       
       setShowPopup(true);
       
+      // Play celebration music if player is sold
+      if (soldStatus === 'Sold') {
+        audio.currentTime = 0;
+        audio.volume = 0.5;
+        audio.play().catch(err => console.log('Audio play failed:', err));
+      }
+      
       // Reset form
       setTimeout(() => {
         setShowPopup(false);
+        audio.pause();
+        audio.currentTime = 0;
         setSelectedPlayer(null);
         setSearchTerm('');
         setSoldValue('');

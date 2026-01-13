@@ -17,7 +17,7 @@ const ViewPlayers = () => {
 
   const fetchPlayers = async () => {
     try {
-      const response = await axios.get('http://localhost:8081/backend/api/players.php');
+      const response = await axios.get('https://spl.sarasagroup.lk/backend/api/players.php');
       setPlayers(response.data);
       setLoading(false);
     } catch (err) {

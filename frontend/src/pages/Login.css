@@ -128,9 +128,9 @@
 .form-group label {
   display: block;
   margin-bottom: 8px;
-  color: #2d3436;
-  font-weight: 600;
-  font-size: 14px;
+  color: #000000 !important;
+  font-weight: 700;
+  font-size: 15px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -250,6 +250,7 @@
   }
 
   .form-group label {
+    color: #000000 !important;
     font-size: 13px;
   }
 
