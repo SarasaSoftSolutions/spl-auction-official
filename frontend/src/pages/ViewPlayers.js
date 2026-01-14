@@ -10,6 +10,7 @@ const ViewPlayers = () => {
   const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [filterBowling, setFilterBowling] = useState('All');
+  const [imageErrors, setImageErrors] = useState({});
   const userRole = localStorage.getItem('userRole') || 'admin';
 
   useEffect(() => {
@@ -40,6 +41,13 @@ const ViewPlayers = () => {
     localStorage.removeItem('username');
     localStorage.removeItem('userRole');
     navigate('/login');
+  };
+
+  const handleImageError = (playerId) => {
+    setImageErrors(prev => ({
+      ...prev,
+      [playerId]: true
+    }));
   };
 
   const getAvatarColor = (name) => {
@@ -73,6 +81,14 @@ const ViewPlayers = () => {
       'Leg Spin': '🎯'
     };
     return icons[style] || '⚾';
+  };
+
+  const getPlayerCardColor = (index) => {
+    const colors = [
+      '#2D3C59', // Navy Blue
+
+    ];
+    return colors[index % colors.length];
   };
 
   const filteredPlayers = players.filter(player => {
@@ -207,38 +223,51 @@ const ViewPlayers = () => {
           </div>
         ) : (
           <div className="players-grid">
-            {filteredPlayers.map((player) => (
-              <div key={player.id} className="player-card">
-                <div className="player-card-header">
-                  <div className="player-avatar" style={{ background: getAvatarColor(player.player_name) }}>
-                    {getInitials(player.player_name)}
-                  </div>
-                  <div className="player-badge">{getBowlingIcon(player.bowling_style)}</div>
-                </div>
-                <div className="player-card-body">
-                  <h3 className="player-name">{player.player_name}</h3>
-                  <div className="player-age">Age: {player.age}</div>
+            {filteredPlayers.map((player, index) => (
+              <div key={player.id} className="player-card" style={{ background: getPlayerCardColor(index) }}>
+                <div className="player-card-image-wrapper">
+                  {!imageErrors[player.id] ? (
+                    <img 
+                      src={`https://spl.sarasagroup.lk/assets/Images/players/${player.id}.png`}
+                      alt={player.id}
+                      className="player-full-image"
+                      onError={() => handleImageError(player.id)}
+                    />
+                  ) : (
+                    <div className="player-avatar-fallback" style={{ background: getAvatarColor(player.player_name) }}>
+                      {getInitials(player.player_name)}
+                    </div>
+                  )}
                   
-                  <div className="player-details">
-                    <div className="detail-row">
-                      <span className="detail-label">🏏 Batting</span>
-                      <span className="detail-value batting-badge">{player.batting_side}</span>
+                  {player.sold_status === 'Sold' && (
+                    <img 
+                      src="/assets/soldoutRound.png"
+                      alt="Sold"
+                      className="sold-watermark"
+                    />
+                  )}
+                  {player.sold_status === 'Hold' && (
+                    <img 
+                      src="/assets/on-hold.png"
+                      alt="On Hold"
+                      className="hold-watermark"
+                    />
+                  )}
+                                    <div className="player-card-overlay">
+                    <div className="player-card-footer">
+                      <div className="player-year-badge">
+                        <div className="year-text">2026</div>
+                        <div className="tournament-text">SPL TOURNAMENT</div>
+                      </div>
+                      <h3 className="player-card-name">{player.player_name}</h3>
+                      <div className="player-meta-info">
+                        <span className="meta-badge">{player.batting_side}</span>
+                        <span className="meta-separator">•</span>
+                        <span className="meta-badge">{player.bowling_style}</span>
+                        <span className="meta-separator">•</span>
+                        <span className="meta-badge">Age {player.age}</span>
+                      </div>
                     </div>
-                    <div className="detail-row">
-                      <span className="detail-label">⚾ Bowling</span>
-                      <span className="detail-value bowling-badge">{player.bowling_side}</span>
-                    </div>
-                    <div className="detail-row full-width">
-                      <span className="detail-label">💨 Style</span>
-                      <span className="detail-value style-badge">
-                        {getBowlingIcon(player.bowling_style)} {player.bowling_style}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div className="player-card-footer">
-                  <div className="registration-date">
-                    Registered: {new Date(player.registered_at).toLocaleDateString()}
                   </div>
                 </div>
               </div>
